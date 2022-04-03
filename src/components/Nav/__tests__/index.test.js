@@ -1,43 +1,37 @@
-/* eslint-disable testing-library/prefer-screen-queries */
-import React from "react";
-import { render, cleanup } from "@testing-library/react";
-import "@testing-library/jest-dom/extend-expect";
-import Nav from "..";
+// __tests__/Nav.test.js with hard coded categories
+import React from 'react';
+import { render, cleanup } from '@testing-library/react';
+import '@testing-library/jest-dom/extend-expect';
+import Nav from '..';
 
 afterEach(cleanup);
 
-describe("Nav component", () => {
-  //baseline test
-  it("renders", () => {
+describe('Nav component', () => {
+  it('renders', () => {
     render(<Nav />);
   });
 
-  //snapshot test
-  describe("Nav component", () => {
-    it("matches snapshot", () => {
-      const { asFragment } = render(<Nav />);
-      //assert value comparison
-      expect(asFragment()).toMatchSnapshot();
-    });
-  });
-});
+  it('matches snapshot', () => {
+    const { asFragment } = render(<Nav />);
 
-describe("emoji is visible", () => {
-  it("inserts emoji into the h2", () => {
-    //arrange
+    expect(asFragment()).toMatchSnapshot();
+  });
+})
+
+describe('emoji is visible', () => {
+  it('inserts emoji into the h2', () => {
     const { getByLabelText } = render(<Nav />);
-    //assert
-    expect(getByLabelText("camera")).toHaveTextContent("📸");
-  });
-});
 
-describe("links are visible", () => {
-  it("inserts text into the links", () => {
-    //arrange
+    expect(getByLabelText('camera')).toHaveTextContent('📸');
+  });
+})
+
+describe('links are visible', () => {
+  it('inserts text into the links', () => {
     const { getByTestId } = render(<Nav />);
 
-    //assert
-    expect(getByTestId("link")).toHaveTextContent("Oh Snap!");
-    expect(getByTestId("about")).toHaveTextContent("About me");
+    expect(getByTestId('link')).toHaveTextContent('Oh Snap!');
+    expect(getByTestId('about')).toHaveTextContent('About me');
   });
-});
+
+})
